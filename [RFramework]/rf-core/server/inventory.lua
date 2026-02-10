@@ -9,6 +9,19 @@ exports('RegisterCharStash', RegisterCharStash)
 
 RegisterServerEvent('rframework:server:swapInventory', function(oldCharId, newCharId)
     local src = source
+    
+    -- Handle first-time character selection (no old character)
+    if oldCharId == 0 or oldCharId == nil then
+        RegisterCharStash(newCharId)
+        local stashItems = ox_inv:GetInventoryItems('char_' .. newCharId)
+        for _, item in ipairs(stashItems) do
+            ox_inv:AddItem(src, item.name, item.count, item.metadata, item.slot)
+        end
+        RFramework.Notify(src, 'Character inventory loaded!', 'success')
+        return
+    end
+    
+    -- Normal swap between characters
     RegisterCharStash(oldCharId)
     RegisterCharStash(newCharId)
     local playerItems = ox_inv:GetInventoryItems(src)

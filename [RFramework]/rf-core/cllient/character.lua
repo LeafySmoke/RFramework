@@ -135,7 +135,7 @@ RegisterCommand('characters', function()
 end, false)
 
 -- Delete character command (alternative to context menu)
-RegisterCommand('deletechar', function(source, args)
+RegisterCommand('deletechar', function(_, args)
     if not args[1] then
         lib.notify({
             title = 'Error',

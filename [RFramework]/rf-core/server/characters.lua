@@ -12,10 +12,10 @@ RegisterServerEvent('rframework:server:switchChar', function(charId)
                     Player.PlayerData.activeChar.skin or '{}', 
                     Player.PlayerData.activeChar.char_id
                 })
-                -- Swap inventory
+                -- Swap inventory from old char to new char
                 TriggerEvent('rframework:server:swapInventory', Player.PlayerData.activeChar.char_id, charId)
             else
-                -- First time selecting a character, just load inventory
+                -- First time selecting a character, just load inventory (no old char to save)
                 TriggerEvent('rframework:server:swapInventory', 0, charId)
             end
             
