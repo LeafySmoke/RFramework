@@ -1,1 +1,0 @@
-RFramework.Notify(src, 'Welcome to RFramework! Rules: Be nice.', 'info')
