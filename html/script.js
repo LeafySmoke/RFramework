@@ -1,8 +1,11 @@
 // RFramework UI Script
 
+// Get the resource name from the URL (FiveM provides this)
+const resourceName = window.location.hostname;
+
 $(function() {
     // Notify Lua that NUI is ready
-    $.post('https://rframework/ready', JSON.stringify({}));
+    $.post(`https://${resourceName}/ready`, JSON.stringify({}));
 
     // Listen for messages from Lua
     window.addEventListener('message', function(event) {
@@ -35,7 +38,7 @@ function toggleMenu(show) {
 }
 
 function closeMenu() {
-    $.post('https://rframework/close', JSON.stringify({}));
+    $.post(`https://${resourceName}/close`, JSON.stringify({}));
     $('#menu').addClass('hidden');
 }
 

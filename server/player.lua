@@ -37,12 +37,13 @@ end
 -- Load player from database
 RFramework.LoadPlayer = function(source)
     local identifier = GetPlayerIdentifier(source)
-    local name = GetPlayerName(source)
     
     if not identifier then
         print('[RFramework] ERROR: No identifier found for player ' .. source)
         return nil
     end
+    
+    local name = GetPlayerName(source)
     
     -- For now, create a new player (database loading will be implemented in database.lua)
     local player = RFramework.CreatePlayer(source, identifier, name)
