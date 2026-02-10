@@ -21,17 +21,14 @@ RegisterServerEvent('rframework:server:playerLoaded', function()
         chars = MySQL.query.await('SELECT * FROM characters WHERE license = ?', {license})
     end
     RFramework.Players[src].PlayerData.chars = chars
-    RFramework.Players[src].PlayerData.activeChar = chars[1]
-    RFramework.Players[src].PlayerData.citizenid = chars[1].char_id  -- For inventory/bridges
     
-    -- Register stashes
+    -- Register stashes for all characters
     for _, char in ipairs(chars) do
         exports['rframework']:RegisterCharStash(char.char_id)
     end
     
-    -- Initial inv swap
-    TriggerServerEvent('rframework:server:swapInventory', 0, chars[1].char_id)
-    
+    -- Show character selection menu
+    TriggerClientEvent('rframework:client:showCharacterSelection', src, chars)
     TriggerClientEvent('rframework:client:playerLoaded', src, RFramework.Players[src].PlayerData)
 end)
 

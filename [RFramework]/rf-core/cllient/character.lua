@@ -1,4 +1,5 @@
 local RFramework = exports['rframework']:GetCoreObject()
+local playerCharacters = {}
 
 RegisterNetEvent('rframework:client:loadCharacter', function(charData)
     local playerPed = PlayerPedId()
@@ -61,3 +62,111 @@ RegisterNetEvent('rframework:client:showAdminMenu', function()
         }
     })
 end)
+
+-- Character Selection Menu
+RegisterNetEvent('rframework:client:showCharacterSelection', function(characters)
+    playerCharacters = characters
+    OpenCharacterSelectionMenu()
+end)
+
+RegisterNetEvent('rframework:client:refreshCharacters', function(characters)
+    playerCharacters = characters
+    OpenCharacterSelectionMenu()
+end)
+
+function OpenCharacterSelectionMenu()
+    local menuOptions = {}
+    
+    -- Add existing characters to menu
+    for _, char in ipairs(playerCharacters) do
+        table.insert(menuOptions, {
+            title = char.first_name .. ' ' .. char.last_name,
+            description = 'Character ID: ' .. char.char_id,
+            icon = 'user',
+            onSelect = function()
+                TriggerServerEvent('rframework:server:switchChar', char.char_id)
+            end,
+            metadata = {
+                {label = 'Delete', value = 'Hold E to delete'}
+            }
+        })
+    end
+    
+    -- Add create character option if under max limit
+    if #playerCharacters < 5 then
+        table.insert(menuOptions, {
+            title = 'Create New Character',
+            description = 'Create a new character',
+            icon = 'plus',
+            onSelect = function()
+                OpenCharacterCreationMenu()
+            end
+        })
+    end
+    
+    lib.showContext({
+        id = 'character_selection',
+        title = 'Character Selection',
+        options = menuOptions
+    })
+end
+
+function OpenCharacterCreationMenu()
+    local input = lib.inputDialog('Create Character', {
+        {type = 'input', label = 'First Name', description = 'Enter first name', required = true, min = 2, max = 50},
+        {type = 'input', label = 'Last Name', description = 'Enter last name', required = true, min = 2, max = 50}
+    })
+    
+    if input then
+        local firstName = input[1]
+        local lastName = input[2]
+        TriggerServerEvent('rframework:server:createCharacter', firstName, lastName)
+    end
+end
+
+-- Command to open character selection
+RegisterCommand('characters', function()
+    if #playerCharacters > 0 then
+        OpenCharacterSelectionMenu()
+    else
+        lib.notify({
+            title = 'Error',
+            description = 'No characters available',
+            type = 'error'
+        })
+    end
+end, false)
+
+-- Delete character command (alternative to context menu)
+RegisterCommand('deletechar', function(source, args)
+    if not args[1] then
+        lib.notify({
+            title = 'Error',
+            description = 'Usage: /deletechar [char_id]',
+            type = 'error'
+        })
+        return
+    end
+    
+    local charId = tonumber(args[1])
+    if not charId then
+        lib.notify({
+            title = 'Error',
+            description = 'Invalid character ID',
+            type = 'error'
+        })
+        return
+    end
+    
+    -- Confirm deletion
+    local alert = lib.alertDialog({
+        header = 'Delete Character',
+        content = 'Are you sure you want to delete this character? This action cannot be undone!',
+        centered = true,
+        cancel = true
+    })
+    
+    if alert == 'confirm' then
+        TriggerServerEvent('rframework:server:deleteCharacter', charId)
+    end
+end, false)

@@ -8,21 +8,15 @@ version '1.0.0'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'modules/lib.lua',
-    'shared/locale.lua',
-    'shared/functions.lua',
+    'shared.lua',
+    'config.lua',
+    'shared/utils.lua',
 }
 
 client_scripts {
-    'client/main.lua',
-    'client/groups.lua',
-    'client/functions.lua',
-    'client/loops.lua',
-    'client/events.lua',
-    'client/character.lua',
-    'client/bridge.lua',
-    'client/discord.lua',
-    'client/vehicles.lua',
+    'cllient/main.lua',
+    'cllient/character.lua',
+    'cllient/bridge.lua',
     'bridge/qb/client/main.lua',
 }
 
@@ -37,28 +31,25 @@ server_scripts {
     'server/commands.lua',
     'server/loops.lua',
     'server/character.lua',
+    'server/characters.lua',
+    'server/money.lua',
+    'server/jobs.lua',
+    'server/inventory.lua',
+    'server/vehicles.lua',
+    'server/admin.lua',
+    'server/queue.lua',
+    'server/bridge.lua',
     'server/vehicle-persistence.lua',
     'bridge/qb/server/main.lua',
 }
 
 files {
-    'modules/*.lua',
-    'data/*.lua',
-    'shared/gangs.lua',
-    'shared/items.lua',
-    'shared/jobs.lua',
-    'shared/locations.lua',
-    'shared/main.lua',
-    'shared/vehicles.lua',
-    'shared/weapons.lua',
     'bridge/qb/client/functions.lua',
     'bridge/qb/client/drawtext.lua',
     'bridge/qb/client/events.lua',
     'bridge/qb/shared/main.lua',
     'bridge/qb/shared/export-function.lua',
-    'config/client.lua',
-    'config/shared.lua',
-    'locales/*.json'
+    'bridge/qb/shared/compat.lua',
 }
 
 dependencies {
