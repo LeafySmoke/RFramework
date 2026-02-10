@@ -41,7 +41,7 @@ return {
                     item.description = item.description
                     item.weight = item.weight or 0
                     dump[k] = item
-                    count += 1
+                    count = count + 1
                 end
             end
         end
@@ -73,7 +73,7 @@ return {
 
             for _, item in pairs(dump) do
                 if not ItemList[item.name] then
-                    fileSize += 1
+                    fileSize = fileSize + 1
 
                     ---@todo cry
                     local itemStr = itemFormat:format(item.name, item.label, item.weight, item.stack, item.close, item.description or 'nil', item.hunger or 'nil', item.thirst or 'nil', item.stress or 'nil', item.image or 'nil')

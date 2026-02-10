@@ -39,7 +39,6 @@ server_scripts {
     'server/admin.lua',
     'server/queue.lua',
     'server/bridge.lua',
-    'server/vehicle-persistence.lua',
     'bridge/qb/server/main.lua',
 }
 
