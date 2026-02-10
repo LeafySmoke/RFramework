@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFramework UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="hud" class="hud hidden">
+        <div class="hud-container">
+            <div class="hud-item">
+                <div class="hud-icon">💵</div>
+                <div class="hud-content">
+                    <div class="hud-label">Cash</div>
+                    <div class="hud-value" id="money">$0</div>
+                </div>
+            </div>
+            
+            <div class="hud-item">
+                <div class="hud-icon">🏦</div>
+                <div class="hud-content">
+                    <div class="hud-label">Bank</div>
+                    <div class="hud-value" id="bank">$0</div>
+                </div>
+            </div>
+            
+            <div class="hud-item">
+                <div class="hud-icon">💼</div>
+                <div class="hud-content">
+                    <div class="hud-label">Job</div>
+                    <div class="hud-value" id="job">Unemployed</div>
+                    <div class="hud-sublabel" id="jobGrade">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu" class="menu hidden">
+        <div class="menu-container">
+            <div class="menu-header">
+                <h2>RFramework Menu</h2>
+                <button class="close-btn" onclick="closeMenu()">×</button>
+            </div>
+            <div class="menu-content">
+                <p>This is a placeholder menu. Customize it as needed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="nui://game/ui/jquery.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

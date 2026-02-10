@@ -1,0 +1,29 @@
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Database files (if using local development)
+*.db
+*.sqlite
+
+# Node modules (if using any JS tooling)
+node_modules/
+
+# Build artifacts
+dist/
+build/
