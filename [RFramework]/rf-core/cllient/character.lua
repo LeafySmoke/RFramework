@@ -85,10 +85,7 @@ function OpenCharacterSelectionMenu()
             icon = 'user',
             onSelect = function()
                 TriggerServerEvent('rframework:server:switchChar', char.char_id)
-            end,
-            metadata = {
-                {label = 'Delete', value = 'Hold E to delete'}
-            }
+            end
         })
     end
     
